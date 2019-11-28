@@ -29,7 +29,7 @@ with anki_vector.Robot() as robot:
         robot.vision.enable_display_camera_feed_on_face(False)
         robot.camera.close_camera_feed()
         
-        img = image.load_img('./latest.jpg', target_size=(224,224))
+        img = image.load_img('./latest.jpg', target_size=(224,224), interpolation='nearest')
         x = image.img_to_array(img)
         x = np.expand_dims(x, axis=0)
         x = preprocess_input(x)
@@ -43,7 +43,20 @@ with anki_vector.Robot() as robot:
         obj = obj.replace("_"," ")
         print('Predicted:', obj)
 
-        robot.behavior.say_text('Might be {}'.format(obj))
+        if obj == "pill bottle":
+            robot.behavior.say_text('I need to take my meds!')
+            robot.anim.play_animation_trigger('GreetAfterLongTime')
+        else:
+            robot.behavior.say_text('Might be {}'.format(obj))
+
+
+        battery_state = robot.get_battery_state()
+        print(f"battery state: {battery_state}")
+        if battery_state.battery_volts  <= 3.6:
+            robot.behavior.say_text('I too hungry to work')
+            robot.behavior.drive_on_charger()
+            break
+
         robot.disconnect()
-        time.sleep(15)
+        time.sleep(30)
         robot.connect()
