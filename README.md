@@ -9,4 +9,4 @@ Use ResNet50 image network to identify object while vector is walking around.
 It will display the image on its screen.
 it will say out loud what it is.
 It will print out what it is on the console.
-
+I tried the event driven way but the api is so buggy that once it executed one, it threw future exceptions and that's the end of it.  So here I'm using a while True loop instead but I reliquish control of the robot for 15 seconds in between so vector can carry on anything else.
