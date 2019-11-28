@@ -5,8 +5,8 @@ you need to pip install kara, tf, numpy, anki_vector_sku, and time packages
 
 test1.py
 
-Use ResNet50 image network to identify object while vector is walking around
-It will display the image on its screen
-it will say out loud what it is
-It will print out what it is on the console
+Use ResNet50 image network to identify object while vector is walking around.
+It will display the image on its screen.
+it will say out loud what it is.
+It will print out what it is on the console.
 
