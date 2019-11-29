@@ -29,8 +29,8 @@ with anki_vector.Robot() as robot:
         robot.vision.enable_display_camera_feed_on_face(False)
         robot.camera.close_camera_feed()
         
-        img = image.load_img('./latest.jpg', target_size=(224,224), interpolation='nearest')
-        x = image.img_to_array(img)
+        oimage = oimage.crop(box=(170,0,469,299))
+        x = image.img_to_array(oimage)
         x = np.expand_dims(x, axis=0)
         x = preprocess_input(x)
 
