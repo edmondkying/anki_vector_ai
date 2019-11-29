@@ -1,15 +1,15 @@
-
 from PIL import Image
 import numpy as np
 import anki_vector
 from anki_vector.events import Events
 from anki_vector.util import degrees
 import time
-from keras.applications.resnet50 import ResNet50
+from keras.applications.xception import Xception
 from keras.preprocessing import image
-from keras.applications.resnet50 import preprocess_input, decode_predictions
-model = ResNet50(weights='imagenet')
+from keras.applications.xception import preprocess_input, decode_predictions
+model = Xception(weights='imagenet')
 
+screen_dimensions = anki_vector.screen.SCREEN_WIDTH, anki_vector.screen.SCREEN_HEIGHT
 
 with anki_vector.Robot() as robot:
 
@@ -17,17 +17,19 @@ with anki_vector.Robot() as robot:
     screen_dimensions = anki_vector.screen.SCREEN_WIDTH, anki_vector.screen.SCREEN_HEIGHT
 
     while True:
+
+        robot.behavior.set_lift_height(0.0)
+        robot.behavior.set_head_angle(degrees(0.0))
+
         robot.camera.init_camera_feed()
         robot.vision.enable_display_camera_feed_on_face(True)
-        
-        aimage = robot.camera.latest_image.raw_image.save('./latest.jpg', 'JPEG')
+        robot.camera.latest_image.raw_image.save('./latest.jpg', 'JPEG')
+        robot.camera.close_camera_feed()
+
         oimage = Image.open('./latest.jpg')
         print("Display image on Vector's face...")
         screen_data = anki_vector.screen.convert_image_to_screen_data(oimage.resize(screen_dimensions))
         robot.screen.set_screen_with_image_data(screen_data, 5.0, True)
-        
-        robot.vision.enable_display_camera_feed_on_face(False)
-        robot.camera.close_camera_feed()
         
         oimage = oimage.crop(box=(170,0,469,299))
         x = image.img_to_array(oimage)
@@ -48,6 +50,8 @@ with anki_vector.Robot() as robot:
             robot.anim.play_animation_trigger('GreetAfterLongTime')
         else:
             robot.behavior.say_text('Might be {}'.format(obj))
+
+        robot.vision.enable_display_camera_feed_on_face(False)
 
 
         battery_state = robot.get_battery_state()
