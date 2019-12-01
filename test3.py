@@ -6,9 +6,8 @@ import time
 import anki_vector
 from anki_vector.events import Events
 from anki_vector.util import degrees
-from keras.applications.xception import Xception
+from keras.applications.xception import Xception, preprocess_input, decode_predictions
 from keras.preprocessing import image
-from keras.applications.xception import preprocess_input, decode_predictions
 
 model = Xception(weights='imagenet')
 
