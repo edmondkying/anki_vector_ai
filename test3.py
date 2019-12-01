@@ -1,14 +1,15 @@
 from PIL import Image
 import numpy as np
+import urllib
+import random
+import time
 import anki_vector
 from anki_vector.events import Events
 from anki_vector.util import degrees
-import time
 from keras.applications.xception import Xception
 from keras.preprocessing import image
 from keras.applications.xception import preprocess_input, decode_predictions
-import urllib
-import random
+
 
 model = Xception(weights='imagenet')
 
