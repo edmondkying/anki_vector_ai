@@ -13,7 +13,7 @@ import random
 model = Xception(weights='imagenet')
 
 jokes = []
-content=urllib.request.urlopen("http://www.cuttergames.com/vector/jokes.txt") 
+content=urllib.request.urlopen("http://www.textfiles.com/humor/COMPUTER/computer.say") 
 for line in content:
     line = line.decode("utf-8")
     jokes.append(line.rstrip('\n'))
