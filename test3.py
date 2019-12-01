@@ -88,6 +88,6 @@ with anki_vector.Robot(enable_face_detection=True) as robot:
             break
 
         robot.disconnect()
-        time.sleep(15)
+        time.sleep(20)
         robot.connect()
 
