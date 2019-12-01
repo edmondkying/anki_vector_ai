@@ -27,7 +27,6 @@ with anki_vector.Robot(enable_face_detection=True) as robot:
 
     while True:
 
-
         face_name = None
         for face in robot.world.visible_faces:
             face_name = face.name
