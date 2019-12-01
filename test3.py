@@ -10,14 +10,13 @@ from keras.applications.xception import Xception
 from keras.preprocessing import image
 from keras.applications.xception import preprocess_input, decode_predictions
 
-
 model = Xception(weights='imagenet')
 
 jokes = []
 content=urllib.request.urlopen("http://www.textfiles.com/humor/COMPUTER/computer.say") 
 for line in content:
     line = line.decode("utf-8")
-    jokes.append(line.rstrip('\n'))
+    jokes.append(line)
 
 screen_dimensions = anki_vector.screen.SCREEN_WIDTH, anki_vector.screen.SCREEN_HEIGHT
 
@@ -39,7 +38,6 @@ with anki_vector.Robot(enable_face_detection=True) as robot:
             robot.behavior.say_text(joke)
         else:
 
-            #if float(str(robot.proximity.last_sensor_reading.distance).split()[1]) <= 130:
             if robot.proximity.last_sensor_reading.unobstructed == False:
 
                 robot.behavior.set_lift_height(0.0)
@@ -51,7 +49,6 @@ with anki_vector.Robot(enable_face_detection=True) as robot:
                 robot.camera.close_camera_feed()
 
                 oimage = Image.open('./latest.jpg')
-                print("Display image on Vector's face...")
                 screen_data = anki_vector.screen.convert_image_to_screen_data(oimage.resize(screen_dimensions))
                 robot.screen.set_screen_with_image_data(screen_data, 5.0, True)
                 
@@ -76,7 +73,6 @@ with anki_vector.Robot(enable_face_detection=True) as robot:
                     robot.behavior.say_text('Might be {}'.format(obj))
 
                 robot.vision.enable_display_camera_feed_on_face(False)
-
 
         battery_state = robot.get_battery_state()
         print(f"battery state: {battery_state}")
