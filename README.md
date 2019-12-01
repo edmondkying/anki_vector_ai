@@ -1,5 +1,6 @@
 # anki_vector_keras
-making a few AI projects on the anki vector.  Its a great bargain at $82 at amazon.com when jetbot is $300
+making a few AI projects on the anki vector.  Its a great bargain at $82 at amazon.com when jetbot is $300.
+
 you need to pip install kara, tf, numpy, anki_vector_sku, and time packages
 
 
