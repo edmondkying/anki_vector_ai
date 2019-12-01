@@ -22,9 +22,6 @@ screen_dimensions = anki_vector.screen.SCREEN_WIDTH, anki_vector.screen.SCREEN_H
 
 with anki_vector.Robot(enable_face_detection=True) as robot:
 
-    # If necessary, move Vector's Head and Lift down
-    screen_dimensions = anki_vector.screen.SCREEN_WIDTH, anki_vector.screen.SCREEN_HEIGHT
-
     while True:
 
         face_name = None
