@@ -31,16 +31,15 @@ with anki_vector.Robot(enable_face_detection=True) as robot:
         face_name = None
         for face in robot.world.visible_faces:
             face_name = face.name
-            print(face_name)
             break
 
         if face_name:
+            greeting = "Hi " + face_name + ", let me tell you a joke"
+            print(greeting)
             robot.behavior.say_text("Hi " + face_name + " let me tell you a joke")
-            num = len(jokes)
-            my_rand = random.randint(0,num-1)
-            raw_joke = jokes[my_rand]
-            print(raw_joke)
-            robot.behavior.say_text(raw_joke)
+            joke = jokes[random.randint(0,len(jokes)-1)]
+            print(joke)
+            robot.behavior.say_text(joke)
         else:
 
             #if float(str(robot.proximity.last_sensor_reading.distance).split()[1]) <= 130:
@@ -92,3 +91,4 @@ with anki_vector.Robot(enable_face_detection=True) as robot:
         robot.disconnect()
         time.sleep(15)
         robot.connect()
+
