@@ -31,7 +31,7 @@ with anki_vector.Robot(enable_face_detection=True) as robot:
         if face_name:
             greeting = "Hi " + face_name + ", let me tell you a joke"
             print(greeting)
-            robot.behavior.say_text("Hi " + face_name + " let me tell you a joke")
+            robot.behavior.say_text(greeting)
             joke = jokes[random.randint(0,len(jokes)-1)]
             print(joke)
             robot.behavior.say_text(joke)
